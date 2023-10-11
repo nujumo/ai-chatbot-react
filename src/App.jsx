@@ -16,21 +16,25 @@ function App() {
 
   const chatsRef = React.useRef(null);
 
-  const scrollChat = () => {
-    console.log('xxx scrollToBottom');
-    chatsRef.current?.scrollTo(0, 1e10);
-  };
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      chatsRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+      chatsRef.current?.scrollTo(0, 1e10);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [isTyping]);
 
   const chat = async (e, message) => {
     e.preventDefault();
 
+    if (!message) return;
+
     setIsTyping(true);
+
     let messages = chats;
     messages.push({ role: 'user', content: message });
     // update chats with user input
     setChats(messages);
-
-    scrollChat();
     setMessage('');
 
     await openai.chat.completions
@@ -42,7 +46,6 @@ function App() {
         messages.push(result.choices[0].message);
         // update chats with bot response
         setChats(messages);
-        scrollChat();
         setIsTyping(false);
       })
       .catch((error) => console.log(error));
@@ -71,7 +74,7 @@ function App() {
           : null}
         {isTyping ? (
           <div>
-            <p>
+            <p className='mb-3'>
               <i>Typing...</i>
             </p>
           </div>

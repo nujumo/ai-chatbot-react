@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { OpenAI } from 'openai';
+import { SiChatbot, SiSuperuser } from 'react-icons/si';
 
 import './index.css';
 
@@ -66,8 +67,8 @@ function App() {
               className={`flex flex-shrink mb-4 rounded-xl p-3 ${chat.role === 'user' ? 'flex-row-reverse text-right bg-gray-300' : 'flex-row bg-gray-600 text-white'
                 }`}
             >
-              <span>{chat.role}</span>
-              <span>: </span>
+              <span className='mt-1 '>{chat.role === 'user' ? <SiSuperuser className='ml-2' /> : <SiChatbot className='mr-2' />}
+              </span>
               <span>{chat.content}</span>
             </p>
           ))

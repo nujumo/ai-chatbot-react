@@ -23,4 +23,7 @@ yarn dev
 
 Now point your browser to http://localhost:5173/.
 
+Here is a screenshot of the application.
+![screenshot](/assets/screenshot.png)
+
 

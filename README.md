@@ -10,8 +10,6 @@ Currently, two official plugins are available:
 ## Getting Started
 
 ```sh
-# if using yarn v7 add --legacy-peer-deps option
-# see details here: https://github.com/storybookjs/storybook/issues/12983
 yarn install
 ```
 
